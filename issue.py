@@ -285,12 +285,12 @@ for i in range(len(sections)):
                 pdf = newdir+'/'+str(articleID)+'.pdf'
                 merger.append(pdf)
 
-fullName = newdir+"/seismica_v{}n{}.pdf".format(volume, number)
-coverName = newdir+"/seismica_v{}n{}_cover.pdf".format(volume, number)
+fullName = newdir+"/seismica_v{}n{}_hr.pdf".format(volume, number)
+coverName = newdir+"/seismica_v{}n{}_info_hr.pdf".format(volume, number)
 merger.write(fullName)
 merger.close()
 
-# merge all PDFs for cover
+# merge all PDFs for Issue Information file
 merger = pypdf.PdfMerger()
 merger.append(coverFiname.replace('.png','.pdf'))
 merger.append(imprintFiname.replace('.tex','.pdf'))
@@ -302,13 +302,13 @@ merger.close()
 cmd = """
 cd {dir}
 gs -q -dNOPAUSE -dBATCH -dSAFER -dPDFA=2 -dPDFACompatibilityPolicy=1 -dSimulateOverprint=true -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dAutoRotatePages=/None -dColorImageDownsampleType=/Bicubic -dColorImageResolution=200 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=150 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=200 -sOutputFile={outfi} {infi}
-""".format(dir=newdir, outfi=fullName.replace('.pdf', '_lr.pdf'), infi=fullName)
+""".format(dir=newdir, outfi=fullName.replace('_hr.pdf', '.pdf'), infi=fullName)
 subprocess.call(cmd, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
 cmd = """
 cd {dir}
 gs -q -dNOPAUSE -dBATCH -dSAFER -dPDFA=2 -dPDFACompatibilityPolicy=1 -dSimulateOverprint=true -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dAutoRotatePages=/None -dColorImageDownsampleType=/Bicubic -dColorImageResolution=300 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=300 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=300 -sOutputFile={outfi} {infi}
-""".format(dir=newdir, outfi=coverName.replace('.pdf', '_lr.pdf'), infi=coverName)
+""".format(dir=newdir, outfi=coverName.replace('_hr.pdf', '.pdf'), infi=coverName)
 subprocess.call(cmd, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
 print('\nGalleys for issue v{}n{} are in {}\n'.format(volume, number, issuedir) )

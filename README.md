@@ -28,7 +28,7 @@ All of the data is downloaded from OJS API or website, you only need the login a
 
 6. Run issue.py with
     ```
-    python issue.py -v 1 -n 1 -o /path/to/output/dir/ -l True
+    python issue.py -v 1 -n 1 -o /path/to/output/dir/
     ```
     Arguments are: 
     - -v: issue volume (int)

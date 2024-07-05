@@ -327,11 +327,17 @@ hyperfootnotes=false]{hyperref}
 %                Configuration for TOC
 %-------------------------------------------------------------------------------
 
-\newcommand{\insertarticle}[3]{%
-	\noindent \href{#3}{\textcolor{black}{#1}}\\
-	\hspace*{.5cm}{\color{seismicacolor1}\textbf{#2}}
+\newcommand{\insertarticle}[4]{%
+	\noindent
+	\begin{tabularx}{\columnwidth}{@{}p{.5cm}X@{}}
+	\textcolor{gray}{#1} & \href{#4}{\textcolor{black}{#2}} \\
+ 	& \hspace*{.5cm}{\color{seismicacolor1}\textbf{#3}}
+	\end{tabularx}
 	\vspace*{.2cm}
 }
+
+
+
 
 %-------------------------------------------------------------------------------
 %                Hyphenation and stuff
